@@ -8,9 +8,9 @@ import TelcoCapabilityIndex from '@site/tabs/research/components/TelcoCapability
 import TCIFaq from '@site/tabs/research/components/TCIFaq';
 
 <div className="research-tabs">
-  <a href="/open_telco/research/dashboard" className="research-tab active">Dashboard</a>
-  <a href="/open_telco/research/benchmarks" className="research-tab">Benchmarks</a>
-  <a href="/open_telco/research/models" className="research-tab">Models</a>
+  <a href="/ot_hub/research/dashboard" className="research-tab active">Dashboard</a>
+  <a href="/ot_hub/research/benchmarks" className="research-tab">Benchmarks</a>
+  <a href="/ot_hub/research/models" className="research-tab">Models</a>
 </div>
 
 # AI Benchmarking
