@@ -1,12 +1,9 @@
 name: Deploy Website
 
 on:
-  # Trigger from leaderboard repo after HF sync
+  # Trigger from leaderboard repo or main repo
   repository_dispatch:
-    types: [leaderboard-updated]
-  # Trigger from main repo after docs change
-  repository_dispatch:
-    types: [docs-updated]
+    types: [leaderboard-updated, docs-updated]
   # Deploy on direct changes to ot_hub
   push:
     branches: [main]
