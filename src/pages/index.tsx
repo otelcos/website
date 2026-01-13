@@ -17,10 +17,6 @@ function HeroSection(): JSX.Element {
         <h1 className={styles.heroTitle}>
           Evaluating AI as Network Engineers
         </h1>
-        <p className={styles.heroSubtitle}>
-          Open-source benchmarks to measure AI capabilities in telecommunications.
-          Built by GSMA with leading operators and research institutions.
-        </p>
         <div className={styles.heroCtas}>
           <Link to="/leaderboard" className={styles.ctaPrimary}>
             View Leaderboard

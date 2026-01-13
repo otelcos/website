@@ -15,40 +15,12 @@ Complete setup guide for Open Telco with prerequisites and troubleshooting.
 
 Before you begin, ensure you have:
 
-<div className="prereq-grid">
-  <div className="prereq-card">
-    <div className="prereq-icon">🐍</div>
-    <div className="prereq-content">
-      <h4>Python 3.10-3.13</h4>
-      <p>Python 3.14+ not yet supported</p>
-    </div>
-    <div className="prereq-check">Required</div>
-  </div>
-  <div className="prereq-card">
-    <div className="prereq-icon">📦</div>
-    <div className="prereq-content">
-      <h4>uv package manager</h4>
-      <p>Fast Python dependency management</p>
-    </div>
-    <div className="prereq-check">Required</div>
-  </div>
-  <div className="prereq-card">
-    <div className="prereq-icon">🤗</div>
-    <div className="prereq-content">
-      <h4>HuggingFace account</h4>
-      <p>For dataset access</p>
-    </div>
-    <div className="prereq-check">Required</div>
-  </div>
-  <div className="prereq-card">
-    <div className="prereq-icon">🔑</div>
-    <div className="prereq-content">
-      <h4>Model API key</h4>
-      <p>OpenAI, Anthropic, or OpenRouter</p>
-    </div>
-    <div className="prereq-check">At least one</div>
-  </div>
-</div>
+| Requirement | Details | Status |
+|-------------|---------|--------|
+| **Python 3.10-3.13** | Python 3.14+ not yet supported | Required |
+| **uv package manager** | Fast Python dependency management | Required |
+| **HuggingFace account** | For dataset access | Required |
+| **Model API key** | OpenAI, Anthropic, or OpenRouter | At least one |
 
 ## Step 1: Install uv
 
