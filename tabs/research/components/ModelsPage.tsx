@@ -1,16 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import { useLeaderboardData } from '../../../src/hooks/useLeaderboardData';
-import { withTCI } from '../../../src/utils/calculateTCI';
+// TCI is now pre-calculated and comes from HuggingFace dataset
 import { getTCIColor } from '../../../src/constants/benchmarks';
 import ProviderIcon from '../../../src/components/ProviderIcon';
 
 export default function ModelsPage(): JSX.Element {
-  const { data: rawData, loading, error } = useLeaderboardData();
+  const { data, loading, error } = useLeaderboardData();
   const [searchQuery, setSearchQuery] = useState('');
   const [sortBy, setSortBy] = useState<'tci' | 'mean' | 'name'>('tci');
   const [selectedProviders, setSelectedProviders] = useState<Set<string>>(new Set());
-
-  const data = useMemo(() => rawData.map(withTCI), [rawData]);
 
   const providers = useMemo(() => {
     return [...new Set(data.map(d => d.provider))].sort();

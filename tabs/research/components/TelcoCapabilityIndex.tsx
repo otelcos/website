@@ -13,7 +13,7 @@ import {
 } from 'recharts';
 import type { TCIDataPoint } from '../../../src/types/leaderboard';
 import { useLeaderboardData } from '../../../src/hooks/useLeaderboardData';
-import { calculateTCI } from '../../../src/utils/calculateTCI';
+// TCI is now pre-calculated and comes from HuggingFace dataset
 import { getProviderColor } from '../../../src/constants/providers';
 import ProviderIcon from '../../../src/components/ProviderIcon';
 
@@ -88,24 +88,19 @@ export default function TelcoCapabilityIndex(): JSX.Element {
 
   const chartData = useMemo((): TCIDataPoint[] => {
     return leaderboardData
-      .map((entry) => {
-        const tci = calculateTCI(entry);
-        if (tci === null) return null;
-
-        return {
-          rank: entry.rank,
-          tci,
-          model: entry.model,
-          provider: entry.provider,
-          color: getProviderColor(entry.provider),
-          isLabeled: labeledModels.has(entry.model),
-          teleqna: entry.teleqna,
-          telelogs: entry.telelogs,
-          telemath: entry.telemath,
-          tsg: entry.tsg,
-        };
-      })
-      .filter((d): d is TCIDataPoint => d !== null);
+      .filter(entry => entry.tci !== null)
+      .map((entry) => ({
+        rank: entry.rank,
+        tci: entry.tci as number,
+        model: entry.model,
+        provider: entry.provider,
+        color: getProviderColor(entry.provider),
+        isLabeled: labeledModels.has(entry.model),
+        teleqna: entry.teleqna,
+        telelogs: entry.telelogs,
+        telemath: entry.telemath,
+        tsg: entry.tsg,
+      }));
   }, [leaderboardData]);
 
   const providers = useMemo(() => {

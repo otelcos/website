@@ -52,38 +52,3 @@ Explore evaluations across 5 distinct benchmarks, covering telecommunications kn
 />
 
 </div>
-
-## Running Benchmarks
-
-```bash
-# Run all benchmarks
-uv run inspect eval open_telco/teleqna open_telco/telemath \
-  --model your/model \
-  --log-dir ./results
-
-# Run a specific benchmark
-uv run inspect eval src/open_telco/teleqna/teleqna.py --model openai/gpt-4o
-
-# View results
-uv run inspect view --log-dir ./results
-```
-
-## Benchmark Details
-
-### TeleQnA Categories
-
-| Category | Questions | Description |
-|----------|-----------|-------------|
-| Lexicon | 500 | General telecom terminology |
-| Research Overview | 2,000 | Broad telecom research topics |
-| Research Publications | 4,500 | Detailed multi-disciplinary research |
-| Standards Overview | 1,000 | 3GPP/IEEE standards summaries |
-| Standards Specifications | 2,000 | Technical specs and implementations |
-
-### Scoring Methods
-
-- **TeleQnA**: Multiple choice accuracy with exact match
-- **TeleLogs**: Pattern extraction with soft/hard evaluation modes
-- **TeleMath**: Numerical answer extraction from `\boxed{...}` format
-- **3GPP-TSG**: Pattern matching for working group codes
-- **TeleYAML**: LLM-as-judge evaluation for configuration validity

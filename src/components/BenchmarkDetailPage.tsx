@@ -3,7 +3,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import type { RankingEntry, TCIEntry, LeaderboardEntry } from '../types/leaderboard';
 import { useLeaderboardData } from '../hooks/useLeaderboardData';
-import { calculateTCI, calculateError } from '../utils/calculateTCI';
+import { calculateError } from '../utils/calculateTCI';
 import { BENCHMARKS, getDifficultyColor } from '../constants/benchmarks';
 import RankingRow from './RankingRow';
 
@@ -37,21 +37,17 @@ export default function BenchmarkDetailPage({
   // Calculate rankings
   const rankings = useMemo(() => {
     if (isTCI) {
-      // TCI rankings
+      // TCI rankings (TCI is pre-calculated from HuggingFace)
       return data
-        .map(entry => {
-          const tci = calculateTCI(entry);
-          if (tci === null) return null;
-          return {
-            rank: 0,
-            model: entry.model,
-            provider: entry.provider,
-            score: tci,
-            error: calculateError(tci, 'tci'),
-            isNew: entry.rank <= 3,
-          };
-        })
-        .filter((e): e is RankingEntry => e !== null)
+        .filter(entry => entry.tci !== null)
+        .map(entry => ({
+          rank: 0,
+          model: entry.model,
+          provider: entry.provider,
+          score: entry.tci as number,
+          error: entry.tci_stderr ?? calculateError(entry.tci as number, 'tci'),
+          isNew: entry.rank <= 3,
+        }))
         .sort((a, b) => b.score - a.score)
         .map((entry, index) => ({ ...entry, rank: index + 1 }));
     } else {

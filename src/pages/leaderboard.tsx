@@ -4,28 +4,24 @@ import LeaderboardCard from '../components/LeaderboardCard';
 import TCIHeroCard from '../components/TCIHeroCard';
 import type { LeaderboardEntry, RankingEntry, TCIEntry } from '../types/leaderboard';
 import { useLeaderboardData } from '../hooks/useLeaderboardData';
-import { calculateTCI, calculateError } from '../utils/calculateTCI';
+import { calculateError } from '../utils/calculateTCI';
 import { LEADERBOARD_BENCHMARKS } from '../constants/benchmarks';
 
 export default function LeaderboardPage(): JSX.Element {
   const { data, loading, error } = useLeaderboardData();
 
-  // Calculate TCI rankings
+  // Calculate TCI rankings (TCI is pre-calculated from HuggingFace)
   const tciRankings = useMemo((): TCIEntry[] => {
     const rankings = data
-      .map(entry => {
-        const tci = calculateTCI(entry);
-        if (tci === null) return null;
-        return {
-          rank: 0,
-          model: entry.model,
-          provider: entry.provider,
-          tci,
-          error: calculateError(tci, 'tci'),
-          isNew: entry.rank <= 3, // Mark top 3 as "new" for demo
-        };
-      })
-      .filter((e): e is TCIEntry => e !== null)
+      .filter(entry => entry.tci !== null)
+      .map(entry => ({
+        rank: 0,
+        model: entry.model,
+        provider: entry.provider,
+        tci: entry.tci as number,
+        error: entry.tci_stderr ?? calculateError(entry.tci as number, 'tci'),
+        isNew: entry.rank <= 3, // Mark top 3 as "new" for demo
+      }))
       .sort((a, b) => b.tci - a.tci)
       .map((entry, index) => ({ ...entry, rank: index + 1 }));
 

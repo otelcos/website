@@ -19,7 +19,8 @@ export interface LeaderboardEntry {
   telemath_stderr: number | null;
   tsg: number | null;
   tsg_stderr: number | null;
-  tci?: number | null;
+  tci: number | null;
+  tci_stderr: number | null;
 }
 
 /**
