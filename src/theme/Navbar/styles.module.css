@@ -19,13 +19,16 @@
   gap: 2rem;
 }
 
-/* Brand */
+/* Brand with collapse animation */
 .brand {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
   color: #2d2926;
+  position: relative;
+  min-width: 120px;
+  transition: min-width 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .brand:hover {
@@ -33,16 +36,46 @@
   color: #2d2926;
 }
 
-.brandText {
+.brandCollapsed {
+  min-width: 44px;
+}
+
+/* Expanded brand text */
+.brandExpanded {
   display: flex;
   flex-direction: column;
   line-height: 1.1;
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brandExpandedHidden {
+  opacity: 0;
+  transform: translateX(-6px);
+  pointer-events: none;
+  position: absolute;
+  left: 0;
 }
 
 .title {
   font-weight: 600;
   font-size: 1.125rem;
   letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+}
+
+/* Inline Theta for "Θpen Telco" */
+.thetaInline {
+  display: inline-block;
+  width: 0.85em;
+  height: 1em;
+  vertical-align: baseline;
+  margin-right: 0.02em;
+  color: currentColor;
 }
 
 .subtitle {
@@ -52,6 +85,42 @@
   letter-spacing: 0.02em;
   margin-left: 3px;
   margin-top: 1px;
+}
+
+.gsmaHighlight {
+  color: #a61d2d;
+  font-weight: 600;
+}
+
+/* OT Monogram */
+.brandMonogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 80ms,
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 80ms;
+}
+
+.brandMonogramHidden {
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+}
+
+.monogramSvg {
+  width: 36px;
+  height: 36px;
+  color: #2d2926;
+  transition: color 150ms ease;
+}
+
+.brand:hover .monogramSvg {
+  color: #a61d2d;
 }
 
 /* Nav Items */
@@ -216,6 +285,24 @@
   color: #2d2926;
 }
 
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .brand,
+  .brandExpanded,
+  .brandMonogram,
+  .monogramSvg {
+    transition: none;
+  }
+
+  .brandExpandedHidden {
+    display: none;
+  }
+
+  .brandMonogramHidden {
+    display: none;
+  }
+}
+
 /* Mobile responsive */
 @media (max-width: 996px) {
   .navbarInner {
@@ -227,6 +314,22 @@
   }
 
   .navItemsRight {
+    display: none;
+  }
+
+  /* Disable collapse on mobile - keep full logo */
+  .brandCollapsed {
+    min-width: 120px;
+  }
+
+  .brandExpandedHidden {
+    opacity: 1;
+    transform: none;
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .brandMonogram {
     display: none;
   }
 }

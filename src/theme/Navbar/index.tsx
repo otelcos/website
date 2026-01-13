@@ -97,15 +97,99 @@ const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) =>
   );
 };
 
+// Inline Theta letter for use in "Θpen Telco" text
+const ThetaLetter = () => (
+  <svg
+    className={styles.thetaInline}
+    viewBox="0 0 20 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <ellipse cx="10" cy="12" rx="8" ry="10" stroke="currentColor" strokeWidth="2.5" fill="none"/>
+    <line x1="2" y1="12" x2="18" y2="12" stroke="currentColor" strokeWidth="2"/>
+  </svg>
+);
+
+// ΘT Monogram SVG Component - Theta + T with GSMA accent
+const OTMonogram = () => (
+  <svg
+    className={styles.monogramSvg}
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-label="Open Telco"
+    role="img"
+  >
+    {/* Θ: Greek Theta (circle with horizontal line) */}
+    <circle cx="14" cy="20" r="9" stroke="currentColor" strokeWidth="3" fill="none"/>
+    <line x1="5" y1="20" x2="23" y2="20" stroke="currentColor" strokeWidth="2.5"/>
+    {/* T: Geometric letterform */}
+    <path d="M22 12 L38 12" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+    <path d="M30 12 L30 34" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+    {/* GSMA accent dot */}
+    <circle cx="38" cy="12" r="2" fill="#a61d2d"/>
+  </svg>
+);
+
 export default function Navbar(): JSX.Element {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
+  // Listen for scroll on any element using capture phase
+  useEffect(() => {
+    const handleScroll = (e: Event) => {
+      // Get scroll position from the event target (the actual scrolling element)
+      const target = e.target as Element | Document;
+      let scrollY = 0;
+
+      if (target === document || target === document.documentElement) {
+        scrollY = window.scrollY || document.documentElement.scrollTop;
+      } else if (target instanceof Element) {
+        scrollY = target.scrollTop;
+      }
+
+      setIsCollapsed(scrollY > 50);
+    };
+
+    // Use capture phase to catch scroll events from any element
+    document.addEventListener('scroll', handleScroll, { capture: true, passive: true });
+
+    // Initial check - find any scrolled container
+    const checkInitialScroll = () => {
+      const scrollY = window.scrollY ||
+        document.documentElement.scrollTop ||
+        (document.querySelector('[class*="main"]')?.scrollTop ?? 0);
+      setIsCollapsed(scrollY > 50);
+    };
+    checkInitialScroll();
+
+    return () => {
+      document.removeEventListener('scroll', handleScroll, { capture: true });
+    };
+  }, []);
+
   return (
-    <nav className={`${styles.navbar} navbar`}>
-      <div className={styles.navbarInner}>
-        {/* Logo & Brand */}
-        <Link to="/" className={styles.brand}>
-          <div className={styles.brandText}>
-            <span className={styles.title}>Open Telco</span>
-            <span className={styles.subtitle}>by GSMA</span>
+    <nav className={styles.navbar}>
+        <div className={styles.navbarInner}>
+        {/* Logo & Brand with collapse animation */}
+        <Link to="/" className={`${styles.brand} ${isCollapsed ? styles.brandCollapsed : ''}`}>
+          {/* Expanded State */}
+          <div
+            className={`${styles.brandExpanded} ${isCollapsed ? styles.brandExpandedHidden : ''}`}
+            aria-hidden={isCollapsed}
+          >
+            <span className={styles.title}><ThetaLetter />pen Telco</span>
+            <span className={styles.subtitle}>
+              by <span className={styles.gsmaHighlight}>GSMA</span>
+            </span>
+          </div>
+
+          {/* Collapsed State - Monogram */}
+          <div
+            className={`${styles.brandMonogram} ${!isCollapsed ? styles.brandMonogramHidden : ''}`}
+            aria-hidden={!isCollapsed}
+          >
+            <OTMonogram />
           </div>
         </Link>
 
