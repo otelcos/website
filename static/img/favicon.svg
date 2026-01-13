@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <!-- Bar 1 (shortest) -->
-  <rect x="3" y="22" width="5" height="7" fill="#5C0011"/>
-  <!-- Bar 2 -->
-  <rect x="10" y="16" width="5" height="13" fill="#A3001F"/>
-  <!-- Bar 3 -->
-  <rect x="17" y="10" width="5" height="19" fill="#C50027"/>
-  <!-- Bar 4 (tallest) -->
-  <rect x="24" y="4" width="5" height="25" fill="#DC002B"/>
+  <!-- Θ (theta): ellipse with horizontal bar -->
+  <ellipse cx="9" cy="16" rx="6" ry="8" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <line x1="3" y1="16" x2="15" y2="16" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- T: horizontal top + vertical stem (close to Θ) -->
+  <line x1="14.5" y1="9" x2="25.5" y2="9" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="20" y1="9" x2="20" y2="24" stroke="#1a1a1a" stroke-width="2"/>
+  <!-- GSMA accent dot -->
+  <circle cx="26.5" cy="9" r="1.2" fill="#a61d2d"/>
 </svg>

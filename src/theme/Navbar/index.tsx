@@ -111,24 +111,24 @@ const ThetaLetter = () => (
   </svg>
 );
 
-// ΘT Monogram SVG Component - matches ThetaLetter proportions
+// ΘT Monogram SVG Component - matches favicon.svg exactly
 const OTMonogram = () => (
   <svg
     className={styles.monogramSvg}
-    viewBox="0 0 44 24"
+    viewBox="0 0 32 32"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-label="Open Telco"
     role="img"
   >
-    {/* Θ: Same ellipse proportions as ThetaLetter (rx:ry = 8:10) */}
-    <ellipse cx="10" cy="12" rx="8" ry="10" stroke="currentColor" strokeWidth="2.5" fill="none"/>
-    <line x1="2" y1="12" x2="18" y2="12" stroke="currentColor" strokeWidth="2"/>
-    {/* T: Matching stroke weight to Θ */}
-    <line x1="24" y1="3" x2="40" y2="3" stroke="currentColor" strokeWidth="2.5"/>
-    <line x1="32" y1="3" x2="32" y2="22" stroke="currentColor" strokeWidth="2.5"/>
+    {/* Θ (theta): ellipse with horizontal bar */}
+    <ellipse cx="9" cy="16" rx="6" ry="8" stroke="currentColor" strokeWidth="2" fill="none"/>
+    <line x1="3" y1="16" x2="15" y2="16" stroke="currentColor" strokeWidth="1.5"/>
+    {/* T: horizontal top + vertical stem (close to Θ) */}
+    <line x1="14.5" y1="9" x2="25.5" y2="9" stroke="currentColor" strokeWidth="2"/>
+    <line x1="20" y1="9" x2="20" y2="24" stroke="currentColor" strokeWidth="2"/>
     {/* GSMA accent dot */}
-    <circle cx="41" cy="3" r="1.5" fill="#a61d2d"/>
+    <circle cx="26.5" cy="9" r="1.2" fill="#a61d2d"/>
   </svg>
 );
 
