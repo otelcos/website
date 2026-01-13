@@ -111,27 +111,6 @@ const ThetaLetter = () => (
   </svg>
 );
 
-// ΘT Monogram SVG Component - matches favicon.svg exactly
-const OTMonogram = () => (
-  <svg
-    className={styles.monogramSvg}
-    viewBox="0 0 32 32"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-label="Open Telco"
-    role="img"
-  >
-    {/* Θ (theta): ellipse with horizontal bar */}
-    <ellipse cx="9" cy="16" rx="6" ry="8" stroke="currentColor" strokeWidth="2" fill="none"/>
-    <line x1="3" y1="16" x2="15" y2="16" stroke="currentColor" strokeWidth="1.5"/>
-    {/* T: horizontal top + vertical stem (close to Θ) */}
-    <line x1="14.5" y1="9" x2="25.5" y2="9" stroke="currentColor" strokeWidth="2"/>
-    <line x1="20" y1="9" x2="20" y2="24" stroke="currentColor" strokeWidth="2"/>
-    {/* GSMA accent dot */}
-    <circle cx="26.5" cy="9" r="1.2" fill="#a61d2d"/>
-  </svg>
-);
-
 export default function Navbar(): JSX.Element {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -173,24 +152,38 @@ export default function Navbar(): JSX.Element {
         <div className={styles.navbarInner}>
         {/* Logo & Brand with collapse animation */}
         <Link to="/" className={`${styles.brand} ${isCollapsed ? styles.brandCollapsed : ''}`}>
-          {/* Expanded State */}
-          <div
-            className={`${styles.brandExpanded} ${isCollapsed ? styles.brandExpandedHidden : ''}`}
-            aria-hidden={isCollapsed}
-          >
-            <span className={styles.title}><ThetaLetter />pen Telco</span>
-            <span className={styles.subtitle}>
-              by <span className={styles.gsmaHighlight}>GSMA</span>
+          {/* Animated logo text - individual spans for smooth morphing */}
+          <div className={styles.logoText}>
+            {/* Θ - stays fixed */}
+            <span className={styles.letterTheta}>
+              <ThetaLetter />
+            </span>
+
+            {/* "pen" - fades out and collapses */}
+            <span className={`${styles.letterPen} ${isCollapsed ? styles.letterPenCollapsed : ''}`}>
+              pen
+            </span>
+
+            {/* Space - collapses */}
+            <span className={`${styles.letterSpace} ${isCollapsed ? styles.letterSpaceCollapsed : ''}`}>
+              {' '}
+            </span>
+
+            {/* T - slides left */}
+            <span className={`${styles.letterT} ${isCollapsed ? styles.letterTSlide : ''}`}>
+              T
+            </span>
+
+            {/* "elco" - fades out */}
+            <span className={`${styles.letterFade} ${isCollapsed ? styles.letterFadeOut : ''}`}>
+              elco
             </span>
           </div>
 
-          {/* Collapsed State - Monogram */}
-          <div
-            className={`${styles.brandMonogram} ${!isCollapsed ? styles.brandMonogramHidden : ''}`}
-            aria-hidden={!isCollapsed}
-          >
-            <OTMonogram />
-          </div>
+          {/* Subtitle - fades out */}
+          <span className={`${styles.subtitle} ${isCollapsed ? styles.subtitleHidden : ''}`}>
+            by <span className={styles.gsmaHighlight}>GSMA</span>
+          </span>
         </Link>
 
         {/* Nav Items */}

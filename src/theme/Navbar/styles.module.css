@@ -19,16 +19,14 @@
   gap: 2rem;
 }
 
-/* Brand with collapse animation */
+/* Brand with collapse animation - fixed width to prevent nav shift */
 .brand {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  justify-content: center;
   text-decoration: none;
   color: #2d2926;
   position: relative;
-  min-width: 120px;
-  transition: min-width 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .brand:hover {
@@ -37,35 +35,74 @@
 }
 
 .brandCollapsed {
-  min-width: 44px;
+  /* Keep same width - no change, nav items don't move */
 }
 
-/* Expanded brand text */
-.brandExpanded {
+/* Animated logo text container - fixed width prevents nav shift */
+.logoText {
   display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-  opacity: 1;
-  transform: translateX(0);
-  transition:
-    opacity 180ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.brandExpandedHidden {
-  opacity: 0;
-  transform: translateX(-6px);
-  pointer-events: none;
-  position: absolute;
-  left: 0;
-}
-
-.title {
+  align-items: center;
   font-weight: 600;
   font-size: 1.125rem;
   letter-spacing: -0.01em;
-  display: flex;
+  white-space: nowrap;
+  line-height: 1.1;
+  width: 6.5rem;
+  min-width: 6.5rem;
+}
+
+/* Θ - anchor point, no animation */
+.letterTheta {
+  display: inline-flex;
   align-items: center;
+}
+
+/* "pen" - fades out AND collapses width */
+.letterPen {
+  display: inline-block;
+  opacity: 1;
+  max-width: 2em;
+  overflow: hidden;
+  transition:
+    opacity 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    max-width 200ms cubic-bezier(0.4, 0, 0.2, 1) 100ms;
+}
+
+.letterPenCollapsed {
+  opacity: 0;
+  max-width: 0;
+}
+
+/* "elco" - fades out only */
+.letterFade {
+  opacity: 1;
+  transition: opacity 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.letterFadeOut {
+  opacity: 0;
+}
+
+/* Space between words - collapses */
+.letterSpace {
+  display: inline-block;
+  width: 0.25em;
+  transition: width 200ms cubic-bezier(0.4, 0, 0.2, 1) 120ms;
+}
+
+.letterSpaceCollapsed {
+  width: 0;
+}
+
+/* T - slides toward Θ (very close, matching logo) */
+.letterT {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 120ms;
+}
+
+.letterTSlide {
+  transform: translateX(-0.15em);
 }
 
 /* Inline Theta for "Θpen Telco" */
@@ -85,42 +122,22 @@
   letter-spacing: 0.02em;
   margin-left: 3px;
   margin-top: 1px;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subtitleHidden {
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
 }
 
 .gsmaHighlight {
   color: #a61d2d;
   font-weight: 600;
-}
-
-/* OT Monogram */
-.brandMonogram {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  transform: scale(1);
-  transition:
-    opacity 200ms cubic-bezier(0.4, 0, 0.2, 1) 80ms,
-    transform 200ms cubic-bezier(0.4, 0, 0.2, 1) 80ms;
-}
-
-.brandMonogramHidden {
-  opacity: 0;
-  transform: scale(0.85);
-  pointer-events: none;
-  position: absolute;
-  left: 0;
-}
-
-.monogramSvg {
-  height: 2rem;
-  width: auto;
-  color: #2d2926;
-  transition: color 150ms ease;
-}
-
-.brand:hover .monogramSvg {
-  color: #a61d2d;
 }
 
 /* Nav Items */
@@ -288,17 +305,25 @@
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
   .brand,
-  .brandExpanded,
-  .brandMonogram,
-  .monogramSvg {
+  .logoText,
+  .letterPen,
+  .letterFade,
+  .letterSpace,
+  .letterT,
+  .subtitle {
     transition: none;
   }
 
-  .brandExpandedHidden {
+  /* Instant state changes without animation */
+  .letterPenCollapsed {
     display: none;
   }
 
-  .brandMonogramHidden {
+  .letterFadeOut {
+    display: none;
+  }
+
+  .subtitleHidden {
     display: none;
   }
 }
@@ -322,14 +347,27 @@
     min-width: 120px;
   }
 
-  .brandExpandedHidden {
+  /* Override all collapse animations on mobile */
+  .letterPenCollapsed {
     opacity: 1;
-    transform: none;
-    position: relative;
-    pointer-events: auto;
+    max-width: 2em;
   }
 
-  .brandMonogram {
-    display: none;
+  .letterFadeOut {
+    opacity: 1;
+  }
+
+  .letterSpaceCollapsed {
+    width: 0.25em;
+  }
+
+  .letterTSlide {
+    transform: translateX(0);
+  }
+
+  .subtitleHidden {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
 }
