@@ -117,8 +117,7 @@ const CustomDot: React.FC<CustomDotProps> = ({
 
   return (
     <g
-      className={hasAnimated ? undefined : 'tci-dot'}
-      style={hasAnimated ? undefined : { animationDelay: `${index * 25}ms` }}
+      {...(!hasAnimated && { className: 'tci-dot', style: { animationDelay: `${(index ?? 0) * 25}ms` } })}
       onClick={onClick}
       cursor="pointer"
     >
@@ -153,7 +152,7 @@ const CustomDot: React.FC<CustomDotProps> = ({
           fontWeight={500}
           fontFamily="'Source Sans 3', sans-serif"
           textAnchor="middle"
-          className={hasAnimated ? undefined : 'tci-label'}
+          {...(!hasAnimated && { className: 'tci-label' })}
         >
           {payload.model}
         </text>

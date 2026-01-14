@@ -23,6 +23,16 @@ export default function DateRangeSlider({
   const trackRef = useRef<HTMLDivElement>(null);
   const [dragging, setDragging] = useState<'min' | 'max' | null>(null);
 
+  // Refs to store latest value and onChange to avoid useCallback recreation during drag
+  const valueRef = useRef(value);
+  const onChangeRef = useRef(onChange);
+
+  // Keep refs updated with latest values
+  useEffect(() => {
+    valueRef.current = value;
+    onChangeRef.current = onChange;
+  }, [value, onChange]);
+
   // Convert timestamp to percentage position
   const timestampToPercent = useCallback(
     (timestamp: number): number => {
@@ -62,21 +72,24 @@ export default function DateRangeSlider({
       const percent = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
       const newTimestamp = percentToQuarter(percent);
 
+      const currentValue = valueRef.current;
+      const currentOnChange = onChangeRef.current;
+
       if (dragging === 'min') {
         // Ensure min doesn't exceed max
-        const newMin = Math.min(newTimestamp, value[1]);
-        if (newMin !== value[0]) {
-          onChange([newMin, value[1]]);
+        const newMin = Math.min(newTimestamp, currentValue[1]);
+        if (newMin !== currentValue[0]) {
+          currentOnChange([newMin, currentValue[1]]);
         }
       } else {
         // Ensure max doesn't go below min
-        const newMax = Math.max(newTimestamp, value[0]);
-        if (newMax !== value[1]) {
-          onChange([value[0], newMax]);
+        const newMax = Math.max(newTimestamp, currentValue[0]);
+        if (newMax !== currentValue[1]) {
+          currentOnChange([currentValue[0], newMax]);
         }
       }
     },
-    [dragging, percentToQuarter, value, onChange]
+    [dragging, percentToQuarter]
   );
 
   // Mouse event handlers

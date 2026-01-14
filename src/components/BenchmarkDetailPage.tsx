@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useRef, useEffect } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import katex from 'katex';
@@ -32,7 +32,6 @@ interface BenchmarkDetailPageProps {
 const TCI_CONFIG = {
   key: 'tci',
   title: 'Telco Capability Index (TCI)',
-  description: '',
   longDescription: `The Telco Capability Index (TCI) provides a standardized score for comparing AI model performance across telecommunications domains. Using Item Response Theory (IRT) inspired methodology, TCI weighs each benchmark by its difficulty and discrimination power, producing scores on a normalized scale centered at 115.
 
 Models must complete at least 3 of 4 benchmarks to receive a TCI score. This ensures meaningful comparisons even when some benchmark results are missing.`,
@@ -152,50 +151,6 @@ function TextClassificationQuestionCard({ question, index }: { question: TextCla
 
 function QuestionCard({ question, index, isExpanded, onToggle }: QuestionCardProps) {
   const accordionRef = useRef<HTMLDivElement>(null);
-
-  // Debug logging to identify layout expansion issue
-  useEffect(() => {
-    if (isExpanded && accordionRef.current) {
-      // Small delay to ensure DOM has rendered
-      setTimeout(() => {
-        const accordion = accordionRef.current;
-        if (!accordion) return;
-
-        const content = accordion.querySelector('.accordion-content') as HTMLElement;
-        const card = accordion.querySelector('.question-card') as HTMLElement;
-        const options = accordion.querySelector('.question-options') as HTMLElement;
-        const questionText = accordion.querySelector('.question-text') as HTMLElement;
-
-        console.log(`Q${index + 1} (${question.type}) expanded:`, {
-          accordion: {
-            offsetWidth: accordion.offsetWidth,
-            scrollWidth: accordion.scrollWidth,
-            overflow: accordion.scrollWidth > accordion.offsetWidth,
-          },
-          content: content ? {
-            offsetWidth: content.offsetWidth,
-            scrollWidth: content.scrollWidth,
-            overflow: content.scrollWidth > content.offsetWidth,
-          } : null,
-          card: card ? {
-            offsetWidth: card.offsetWidth,
-            scrollWidth: card.scrollWidth,
-            overflow: card.scrollWidth > card.offsetWidth,
-          } : null,
-          options: options ? {
-            offsetWidth: options.offsetWidth,
-            scrollWidth: options.scrollWidth,
-            overflow: options.scrollWidth > options.offsetWidth,
-          } : null,
-          questionText: questionText ? {
-            offsetWidth: questionText.offsetWidth,
-            scrollWidth: questionText.scrollWidth,
-            overflow: questionText.scrollWidth > questionText.offsetWidth,
-          } : null,
-        });
-      }, 100);
-    }
-  }, [isExpanded, index, question.type]);
 
   const getQuestionPreview = () => {
     let text = '';
@@ -350,7 +305,7 @@ export default function BenchmarkDetailPage({
   const hasQuestions = !isTCI && 'questions' in benchmark && benchmark.questions && benchmark.questions.length > 0;
 
   return (
-    <Layout title={`${benchmark.title} | Leaderboard`} description={benchmark.description}>
+    <Layout title={`${benchmark.title} | Leaderboard`} description={'description' in benchmark ? benchmark.description : benchmark.longDescription}>
       <div className="benchmark-detail-page">
         <Link to="/leaderboard" className="back-link">
           <span className="back-arrow">&larr;</span> Back to Leaderboard
