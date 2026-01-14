@@ -2976,3 +2976,209 @@ code {
     font-size: 13px;
   }
 }
+
+/* ============================================
+   MODELS PAGE (Research Tab)
+   ============================================ */
+
+.models-page-layout {
+  display: flex;
+  gap: 40px;
+  padding: 20px 0;
+}
+
+.models-main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.models-count {
+  margin-bottom: 24px;
+  color: #666;
+  font-size: 15px;
+}
+
+.models-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.model-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.model-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.model-details {
+  min-width: 0;
+  flex: 1;
+}
+
+.model-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.model-provider-tag {
+  display: inline-block;
+  font-size: 12px;
+  padding: 2px 8px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  color: #555;
+  margin-top: 4px;
+}
+
+.model-score-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.score-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.score-label {
+  font-size: 12px;
+  color: #888;
+}
+
+/* Sidebar */
+.models-sidebar {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+.models-sidebar-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+.models-search-container {
+  margin-bottom: 24px;
+}
+
+.models-search-input-wrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.models-search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+.models-sort-container {
+  margin-bottom: 24px;
+}
+
+.models-filter-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #888;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.models-sort-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+}
+
+.models-provider-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.models-provider-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.models-provider-checkbox input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .models-page-layout {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .models-sidebar {
+    width: 100%;
+    order: 1;
+  }
+
+  .models-main-content {
+    order: 0;
+  }
+
+  .score-badge {
+    width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  .model-name {
+    font-size: 14px;
+  }
+
+  .model-row {
+    padding: 12px 0;
+  }
+
+  .model-info {
+    gap: 10px;
+  }
+}

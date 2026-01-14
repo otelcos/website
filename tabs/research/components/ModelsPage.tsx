@@ -3,6 +3,7 @@ import { useLeaderboardData } from '../../../src/hooks/useLeaderboardData';
 // TCI is now pre-calculated and comes from HuggingFace dataset
 import { getTCIColor } from '../../../src/constants/benchmarks';
 import ProviderIcon from '../../../src/components/ProviderIcon';
+import '../../../src/css/custom.css';
 
 export default function ModelsPage(): JSX.Element {
   const { data, loading, error } = useLeaderboardData();
@@ -69,63 +70,41 @@ export default function ModelsPage(): JSX.Element {
   }
 
   return (
-    <div style={{ display: 'flex', gap: '40px', padding: '20px 0' }}>
+    <div className="models-page-layout">
       {/* Main content */}
-      <div style={{ flex: 1 }}>
-        <div style={{ marginBottom: '24px', color: '#666', fontSize: '15px' }}>
+      <div className="models-main-content">
+        <div className="models-count">
           {filteredData.length} models
         </div>
 
         {/* Model list */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+        <div className="models-list">
           {filteredData.map((model) => (
             <div
               key={`${model.provider}-${model.model}`}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '16px 0',
-                borderBottom: '1px solid #eee',
-              }}
+              className="model-row"
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div className="model-info">
                 <ProviderIcon provider={model.provider} size={24} />
-                <div>
-                  <div style={{ fontWeight: '600', fontSize: '15px', color: '#1a1a1a' }}>
+                <div className="model-details">
+                  <div className="model-name">
                     {model.model}
                   </div>
-                  <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
-                    <span style={{
-                      fontSize: '12px',
-                      padding: '2px 8px',
-                      backgroundColor: '#f5f5f5',
-                      borderRadius: '4px',
-                      color: '#555',
-                    }}>
-                      {model.provider}
-                    </span>
-                  </div>
+                  <span className="model-provider-tag">
+                    {model.provider}
+                  </span>
                 </div>
               </div>
 
               {/* TCI Score */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '50%',
-                  backgroundColor: getTCIColor(model.tci),
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  fontWeight: '600',
-                  fontSize: '14px',
-                }}>
+              <div className="model-score-section">
+                <div
+                  className="score-badge"
+                  style={{ backgroundColor: getTCIColor(model.tci) }}
+                >
                   {model.tci !== null ? Math.round(model.tci) : '—'}
                 </div>
-                <span style={{ fontSize: '12px', color: '#888' }}>TCI</span>
+                <span className="score-label">TCI</span>
               </div>
             </div>
           ))}
@@ -133,32 +112,20 @@ export default function ModelsPage(): JSX.Element {
       </div>
 
       {/* Sidebar - Search & Filter */}
-      <div style={{ width: '280px', flexShrink: 0 }}>
-        <h3 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '20px', color: '#1a1a1a' }}>
+      <div className="models-sidebar">
+        <h3 className="models-sidebar-title">
           Search & Filter
         </h3>
 
         {/* Search input */}
-        <div style={{ marginBottom: '24px' }}>
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            border: '1px solid #e0e0e0',
-            borderRadius: '8px',
-            padding: '8px 12px',
-          }}>
+        <div className="models-search-container">
+          <div className="models-search-input-wrapper">
             <input
               type="text"
               placeholder="Search models"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                flex: 1,
-                border: 'none',
-                outline: 'none',
-                fontSize: '14px',
-                backgroundColor: 'transparent',
-              }}
+              className="models-search-input"
             />
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2">
               <circle cx="11" cy="11" r="8" />
@@ -168,22 +135,14 @@ export default function ModelsPage(): JSX.Element {
         </div>
 
         {/* Sort by */}
-        <div style={{ marginBottom: '24px' }}>
-          <div style={{ fontSize: '11px', fontWeight: '600', color: '#888', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        <div className="models-sort-container">
+          <div className="models-filter-label">
             Sort by:
           </div>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as 'tci' | 'mean' | 'name')}
-            style={{
-              width: '100%',
-              padding: '10px 12px',
-              border: '1px solid #e0e0e0',
-              borderRadius: '8px',
-              fontSize: '14px',
-              backgroundColor: 'white',
-              cursor: 'pointer',
-            }}
+            className="models-sort-select"
           >
             <option value="tci">Telco Capability Index</option>
             <option value="mean">Mean Score</option>
@@ -193,31 +152,19 @@ export default function ModelsPage(): JSX.Element {
 
         {/* Developer filter */}
         <div>
-          <div style={{ fontSize: '11px', fontWeight: '600', color: '#888', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <div className="models-filter-label" style={{ marginBottom: '12px' }}>
             Developer
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxHeight: '300px', overflowY: 'auto' }}>
+          <div className="models-provider-filter">
             {providers.map(provider => (
               <label
                 key={provider}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  cursor: 'pointer',
-                  fontSize: '14px',
-                  color: '#333',
-                }}
+                className="models-provider-checkbox"
               >
                 <input
                   type="checkbox"
                   checked={selectedProviders.has(provider)}
                   onChange={() => toggleProvider(provider)}
-                  style={{
-                    width: '16px',
-                    height: '16px',
-                    cursor: 'pointer',
-                  }}
                 />
                 {provider}
               </label>
