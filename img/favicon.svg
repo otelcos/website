@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- White background with dark border -->
+  <rect x="1" y="1" width="30" height="30" rx="2" fill="#faf9f5" stroke="#1a1a1a" stroke-width="1.5"/>
   <!-- Θ (theta): ellipse with horizontal bar -->
-  <ellipse cx="9" cy="16" rx="6" ry="8" stroke="#1a1a1a" stroke-width="2" fill="none"/>
-  <line x1="3" y1="16" x2="15" y2="16" stroke="#1a1a1a" stroke-width="1.5"/>
-  <!-- T: horizontal top + vertical stem (close to Θ) -->
-  <line x1="14.5" y1="9" x2="25.5" y2="9" stroke="#1a1a1a" stroke-width="2"/>
-  <line x1="20" y1="9" x2="20" y2="24" stroke="#1a1a1a" stroke-width="2"/>
-  <!-- GSMA accent dot -->
-  <circle cx="26.5" cy="9" r="1.2" fill="#a61d2d"/>
+  <ellipse cx="11" cy="16" rx="6" ry="8" stroke="#1a1a1a" stroke-width="2" fill="none"/>
+  <line x1="5" y1="16" x2="17" y2="16" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- T: horizontal top + vertical stem -->
+  <line x1="16.5" y1="9" x2="27.5" y2="9" stroke="#1a1a1a" stroke-width="2"/>
+  <line x1="22" y1="9" x2="22" y2="24" stroke="#1a1a1a" stroke-width="2"/>
 </svg>
