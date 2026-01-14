@@ -2793,6 +2793,12 @@ a.benchmark-card-clickable:hover .benchmark-card-arrow {
   flex-wrap: wrap;
 }
 
+.benchmark-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .benchmark-page-title {
   font-family: 'JetBrains Mono', monospace;
   font-size: 1.5rem;
@@ -2802,6 +2808,21 @@ a.benchmark-card-clickable:hover .benchmark-card-arrow {
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.benchmark-page-subtitle {
+  font-size: 0.85rem;
+  color: var(--ot-text-muted);
+  margin: 0;
+}
+
+.benchmark-page-subtitle a {
+  color: var(--ot-accent);
+  text-decoration: none;
+}
+
+.benchmark-page-subtitle a:hover {
+  text-decoration: underline;
 }
 
 .benchmark-header-links {

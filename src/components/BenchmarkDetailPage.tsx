@@ -358,10 +358,18 @@ export default function BenchmarkDetailPage({
 
         {/* Page Header */}
         <div className="benchmark-page-header">
-          <h1 className="benchmark-page-title">
-            {benchmark.title}
-            {isComingSoon && <span className="coming-soon-badge">Coming Soon</span>}
-          </h1>
+          <div className="benchmark-title-group">
+            <h1 className="benchmark-page-title">
+              {benchmark.title}
+              {isComingSoon && <span className="coming-soon-badge">Coming Soon</span>}
+            </h1>
+            <p className="benchmark-page-subtitle">
+              Want to add your model to the leaderboard?{' '}
+              <a href="https://github.com/gsma-research/ot_leaderboard" target="_blank" rel="noopener noreferrer">
+                Go here
+              </a>
+            </p>
+          </div>
           {!isTCI && ('paperLink' in benchmark || 'datasetLink' in benchmark || hasQuestions) && (
             <div className="benchmark-header-links">
               {'paperLink' in benchmark && benchmark.paperLink && (

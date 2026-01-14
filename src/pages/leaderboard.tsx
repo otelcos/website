@@ -93,7 +93,7 @@ export default function LeaderboardPage(): JSX.Element {
           <div className="leaderboard-footer">
             <h3>Submission Guidelines</h3>
             <p>
-              Want your model to be included? Guidelines{' '}
+              Want your model to be included? Go{' '}
               <a href="https://github.com/otelcos/ot_leaderboard" target="_blank" rel="noopener noreferrer">
                 here
               </a>.
