@@ -13,14 +13,14 @@ Open Telco provides a suite of benchmarks testing different AI capabilities in t
 
 ## Quick Reference
 
-| Benchmark | Category | Difficulty | Best For |
-|-----------|----------|------------|----------|
-| TeleQnA | Knowledge | Easy | First evaluation, baseline testing |
-| TeleMath | Math Reasoning | Hard | Mathematical/analytical tasks |
-| TeleLogs | Operations | Medium | Network diagnostics use cases |
-| 3GPP TSG | Standards | Medium | Standards document work |
-| TeleYAML | Configuration | Hard | Network automation (coming soon) |
-| TeleTables | Knowledge | - | Table understanding (coming soon) |
+| Benchmark | Category | Best For |
+|-----------|----------|----------|
+| TeleQnA | Knowledge | First evaluation, baseline testing |
+| TeleMath | Math Reasoning | Mathematical/analytical tasks |
+| TeleLogs | Operations | Network diagnostics use cases |
+| 3GPP TSG | Standards | Standards document work |
+| TeleYAML | Configuration | Network automation (coming soon) |
+| TeleTables | Knowledge | Table interpretation from 3GPP specs |
 
 ## All Benchmarks
 
@@ -72,8 +72,9 @@ Open Telco provides a suite of benchmarks testing different AI capabilities in t
 
 <BenchmarkCard
   title="TeleTables"
-  description="Evaluating LLM knowledge and table interpretation of 3GPP telecom standards."
-  sampleCount="TBD"
+  description="A curated set of 500 questions testing LLM ability to interpret technical tables from 3GPP standards."
+  sampleCount="500 samples"
+  difficulty="medium"
   paperLink="https://arxiv.org/abs/2601.04202"
   datasetLink="https://huggingface.co/datasets/netop/TeleTables"
 />
@@ -102,6 +103,9 @@ uv run inspect eval src/evals/telelogs/telelogs.py --model openai/gpt-4o
 
 # 3GPP TSG - Standards classification
 uv run inspect eval src/evals/three_gpp/three_gpp.py --model openai/gpt-4o
+
+# TeleTables - Table interpretation
+uv run inspect eval src/evals/teletables/teletables.py --model openai/gpt-4o
 ```
 
 ### Common Options
@@ -130,6 +134,24 @@ uv run inspect eval src/evals/three_gpp/three_gpp.py --model openai/gpt-4o
 - Telecom standards
 
 **Recommended starting point** for new users.
+
+---
+
+### TeleTables
+
+**What it tests:** Table interpretation from 3GPP technical specifications
+
+**Question types:**
+- Multiple choice questions requiring table comprehension
+- Knowledge recall about table contents
+
+**Topics covered:**
+- Signal Processing (channel coding, modulation parameters)
+- Channel Configurations (bandwidth, subcarrier spacing)
+- Power Parameters (transmission power, reference signals)
+- Modulation Schemes (QPSK, QAM configurations)
+
+**Note:** Smaller models (<10B parameters) struggle significantly; larger models perform better.
 
 ---
 
@@ -195,6 +217,7 @@ uv run inspect eval src/evals/three_gpp/three_gpp.py --model openai/gpt-4o
 | Benchmark | Typical Range | Notes |
 |-----------|---------------|-------|
 | TeleQnA | 40-70% | Multiple choice, tests breadth |
+| TeleTables | 30-60% | Table interpretation + knowledge recall |
 | TeleLogs | 30-60% | Requires reasoning about network state |
 | TeleMath | 20-50% | Complex multi-step calculations |
 | 3GPP TSG | 50-80% | Document classification |

@@ -186,7 +186,6 @@ export const BENCHMARKS: BenchmarkConfig[] = [
     category: 'knowledge',
     paperLink: 'https://arxiv.org/abs/2601.04202',
     datasetLink: 'https://huggingface.co/datasets/netop/TeleTables',
-    comingSoon: true,
     questions: [
       {
         type: 'mcq',
@@ -247,6 +246,7 @@ export const TCI_CONFIG = {
     telelogs: 0.3,  // Harder - lower avg scores
     telemath: 0.4,  // Medium-hard
     tsg: 0.4,       // Medium-hard
+    teletables: 0.3, // Harder - similar to TeleLogs
   } as Record<string, number>,
 
   /**
@@ -258,6 +258,7 @@ export const TCI_CONFIG = {
     telelogs: 1.5,
     telemath: 1.3,
     tsg: 1.2,
+    teletables: 1.5,
   } as Record<string, number>,
 
   /**
@@ -268,6 +269,7 @@ export const TCI_CONFIG = {
     telelogs: 3.6,
     telemath: 2.8,
     tsg: 2.4,
+    teletables: 3.6,
     tci: 1.8,
   } as Record<string, number>,
 

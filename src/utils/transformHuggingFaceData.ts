@@ -10,6 +10,7 @@ interface HuggingFaceRow {
   telelogs: [number, number, number] | null;
   telemath: [number, number, number] | null;
   '3gpp_tsg': [number, number, number] | null;
+  teletables: [number, number, number] | null;
   tci: [number, number, number] | null; // [score, stderr, 0] - pre-calculated TCI
   date: string;
 }
@@ -63,10 +64,12 @@ export function transformHuggingFaceData(response: HuggingFaceResponse): Leaderb
     const telemath_stderr = row.telemath?.[1] ?? null;
     const tsg = row['3gpp_tsg']?.[0] ?? null;
     const tsg_stderr = row['3gpp_tsg']?.[1] ?? null;
+    const teletables = row.teletables?.[0] ?? null;
+    const teletables_stderr = row.teletables?.[1] ?? null;
     const tci = row.tci?.[0] ?? null;
     const tci_stderr = row.tci?.[1] ?? null;
 
-    const mean = calculateMean([teleqna, telelogs, telemath, tsg]);
+    const mean = calculateMean([teleqna, telelogs, telemath, tsg, teletables]);
 
     return {
       rank: 0, // Will be assigned after sorting
@@ -82,6 +85,8 @@ export function transformHuggingFaceData(response: HuggingFaceResponse): Leaderb
       telemath_stderr,
       tsg,
       tsg_stderr,
+      teletables,
+      teletables_stderr,
       tci,
       tci_stderr,
     };

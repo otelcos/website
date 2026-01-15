@@ -19,6 +19,8 @@ export interface LeaderboardEntry {
   telemath_stderr: number | null;
   tsg: number | null;
   tsg_stderr: number | null;
+  teletables: number | null;
+  teletables_stderr: number | null;
   tci: number | null;
   tci_stderr: number | null;
 }
@@ -61,6 +63,7 @@ export interface TCIDataPoint {
   telelogs: number | null;
   telemath: number | null;
   tsg: number | null;
+  teletables: number | null;
   releaseDate: number; // Unix timestamp for chart X-axis
 }
 

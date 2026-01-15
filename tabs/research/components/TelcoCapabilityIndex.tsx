@@ -271,6 +271,7 @@ export default function TelcoCapabilityIndex(): JSX.Element {
         telelogs: entry.telelogs,
         telemath: entry.telemath,
         tsg: entry.tsg,
+        teletables: entry.teletables,
         releaseDate: getModelReleaseDate(entry.model),
       }));
   }, [leaderboardData]);
