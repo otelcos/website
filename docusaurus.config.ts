@@ -128,7 +128,7 @@ const config: Config = {
           position: 'left',
         },
         {
-          href: 'https://github.com/otelcos/open_telco',
+          href: 'https://github.com/otelcos/evals',
           label: 'GitHub',
           position: 'right',
         },
@@ -168,7 +168,7 @@ const config: Config = {
           items: [
             {
               label: 'GitHub',
-              href: 'https://github.com/otelcos/open_telco',
+              href: 'https://github.com/otelcos/evals',
             },
             {
               label: 'GSMA',
