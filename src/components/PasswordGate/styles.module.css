@@ -1,0 +1,107 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ot-bg, #faf9f5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem 2.5rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 4px 24px rgba(45, 41, 38, 0.12);
+  text-align: center;
+  border: 1px solid var(--ot-border, #e5e0d8);
+}
+
+.logo {
+  margin-bottom: 1.5rem;
+}
+
+.logoImage {
+  height: 48px;
+  width: auto;
+  border-radius: 6px;
+}
+
+.title {
+  font-family: var(--font-display, 'JetBrains Mono', monospace);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--ot-text, #2d2926);
+  margin: 0 0 0.25rem 0;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--ot-text-muted, #5c5552);
+  margin: 0 0 2rem 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input {
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--ot-border, #e5e0d8);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+}
+
+.input:focus {
+  border-color: var(--ot-primary, #a61d2d);
+  box-shadow: 0 0 0 3px rgba(166, 29, 45, 0.1);
+}
+
+.inputError {
+  border-color: #dc3545;
+}
+
+.errorText {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin: -0.5rem 0 0 0;
+  text-align: left;
+}
+
+.button {
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: var(--ot-primary, #a61d2d);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  font-family: inherit;
+}
+
+.button:hover {
+  background: var(--ot-primary-light, #b93343);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--ot-text-subtle, #8a8582);
+  margin: 1.5rem 0 0 0;
+}

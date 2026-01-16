@@ -19,6 +19,11 @@ const config: Config = {
   projectName: 'website',
   trailingSlash: false,
 
+  // Password protection for demo site
+  customFields: {
+    sitePassword: 'opentelco2025',
+  },
+
   onBrokenLinks: 'throw',
 
   i18n: {
