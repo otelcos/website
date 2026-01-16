@@ -151,7 +151,7 @@ uv run inspect eval src/evals/teletables/teletables.py --model openai/gpt-4o
 - Power Parameters (transmission power, reference signals)
 - Modulation Schemes (QPSK, QAM configurations)
 
-**Note:** Smaller models (<10B parameters) struggle significantly; larger models perform better.
+**Note:** Smaller models (&lt;10B parameters) struggle significantly; larger models perform better.
 
 ---
 
